@@ -178,7 +178,7 @@ class CategoryBackgroundManager extends Module
 					    'hint' => $this->l('Upload a category background image from your computer.'),
 				);	
 
-			$fields_data['fields_value']["background_color"] = $this->getBackgroundColors(Tools::getValue('id_category'));
+			$fields_data['fields_value']["background_color"] = $this->helper->getBackgroundColors(Tools::getValue('id_category'));
 		}
 	}
 
