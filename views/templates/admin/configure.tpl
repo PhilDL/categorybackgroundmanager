@@ -40,6 +40,7 @@
 		</div>	
 		
 		<div class="form-wrapper">
+
 			<div class="form-group">
 				<label class="control-label col-lg-3">{l s='Default background color' mod='categorybackgroundmanager'}</label>
 				<div class="col-lg-9">
@@ -62,7 +63,6 @@
 
 
 			<div class="form-group">
-			
 				<label class="control-label col-lg-3">
 				 	{l s='Apply Background to sub-categories' mod='categorybackgroundmanager'}
 				</label>
@@ -80,10 +80,22 @@
 					<p class="help-block">
 						{l s='Sub-categories get parent category background image and color' mod='categorybackgroundmanager'}
 					</p>
-				
 				</div>
-			
-			</div>			
+			</div>	
+
+			<div class="form-group">
+				<label class="control-label col-lg-3">
+					{l s='Position of background' mod='categorybackgroundmanager'}
+				</label>
+				<select class="col-lg-3" name="CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION" id="CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION">
+					<option value="body" {if ($CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION == "body")} selected{/if}>
+						{l s='Body of site' mod='categorybackgroundmanager'}
+					</option>
+					<option value=".columns-container" {if ($CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION == ".columns-container")} selected{/if}>
+						{l s='Middle container' mod='categorybackgroundmanager'}
+					</option>
+				</select>
+			</div>		
 		</div>
 	
 	<div class="panel-footer">

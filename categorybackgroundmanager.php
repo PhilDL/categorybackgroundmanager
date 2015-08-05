@@ -45,7 +45,8 @@ class CategoryBackgroundManager extends Module
             !$this->registerHook('actionCategoryUpdate') OR
             !$this->registerHook('actionAdminCategoriesFormModifier') OR
             !$this->registerHook('displayHeader') OR 
-            !Configuration::updateValue('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG', 1))
+            !Configuration::updateValue('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG', 1) OR 
+            !Configuration::updateValue('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION', ".columns-container"))
             return false;
         return true;
 	}
@@ -105,13 +106,16 @@ class CategoryBackgroundManager extends Module
 	 */
 	public function getContent()
 	{
+		$output = "";
 		if (Tools::isSubmit('submit'.Tools::ucfirst($this->name))) {
-
+;
 			$default_background_color = Tools::getValue('color');
 			$recursive_backgrounds    = Tools::getValue('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG');
+			$image_position           = Tools::getValue('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION');
 
 			Configuration::updateValue('CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR', $default_background_color);
 			Configuration::updateValue('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG', $recursive_backgrounds);
+			Configuration::updateValue('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION', $image_position);
 
 			if (isset($this->errors) && count($this->errors))
 				$output = $this->displayError(implode('<br />', $this->errors));
@@ -131,6 +135,7 @@ class CategoryBackgroundManager extends Module
 		$this->context->smarty->assign('path', $this->_path);
 		$this->context->smarty->assign('CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR', pSQL(Tools::getValue('CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR', Configuration::get('CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR'))));
 		$this->context->smarty->assign('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG', pSQL(Tools::getValue('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG', Configuration::get('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG'))));
+		$this->context->smarty->assign('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION', pSQL(Tools::getValue('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION', Configuration::get('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION'))));
 		$this->context->smarty->assign('submitName', 'submit'.Tools::ucfirst($this->name));
 		$this->context->smarty->assign('errors', $this->errors);
 		$this->context->smarty->assign('colorpicker_path', __PS_BASE_URI__.'js/jquery/plugins/jquery.colorpicker.js');
@@ -222,7 +227,7 @@ class CategoryBackgroundManager extends Module
 						background-color: '.$this->helper->getBackgroundColorForCurrentCat($category, Configuration::get('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG')).' ;
 					}
 
-					.columns-container {
+					'.Configuration::get('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION').' {
 						background-image: url("'.$this->helper->getBackgroundImageForCurrentCat($category, Configuration::get('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG')).'") !important;
 						background-position: top center !important;
 				    	background-repeat: no-repeat !important;		
