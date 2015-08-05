@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+    <module>
+        <name>categorybackgroundmanager</name>
+        <displayName><![CDATA[Categories&#039; backround Manager]]></displayName>
+        <version><![CDATA[0.0.1]]></version>
+        <description><![CDATA[Manage background images or colors of your categories]]></description>
+        <author><![CDATA[Philippe]]></author>
+        <tab><![CDATA[administration]]></tab>
+        <is_configurable>1</is_configurable>
+        <need_instance>0</need_instance>
+        <limited_countries></limited_countries>
+    </module>
