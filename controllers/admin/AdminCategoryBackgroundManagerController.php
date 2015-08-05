@@ -28,57 +28,28 @@ class AdminCategoryBackgroundManagerController extends ModuleAdminController
 {
 
 	public $fieldImageSettings;
-	protected $image_dir = _PS_CAT_IMG_DIR_;
 
     public function __construct()
     {
         parent::__construct();
 
- 		$this->fieldImageSettings = array(
- 			'name' => 'image',
- 			'dir' => 'c'
- 		);
+        $this->helper = new CategoryBackgroundHelper();
     }
 
+    /**
+     * postProcess happens when this controller has been called from the "delete" button under the Background Image
+     * for the Category uploaded. We're gonna check if the delete request has been sent and delete the Imafe if so.
+     * @return Void nothing
+     */
 	public function postProcess()
 	{
         if(Tools::getValue('deletebackground_image')) {
             if (Validate::isLoadedObject($category = new Category((int)Tools::getValue('id_category'))))
-                if($this->deleteImageBackground(true, $category))
+                if($this->helper->deleteImageBackground(true, $category))
                     Tools::redirectAdmin( "index.php?controller=AdminCategories&updatecategory&id_category=".$category->id.'&token='.Tools::getAdminTokenLite('AdminCategories'));
         }       
 
         return parent::postProcess();
 	}
 
-    protected function deleteImageBackground($force_delete = false, $category)
-    {
-        if (!$category->id)
-            return false;
-         
-        if ($force_delete || !$category->hasMultishopEntries())
-        {
-            /* Deleting object images and thumbnails (cache) */
-            if ($this->image_dir)
-            {
-                if (file_exists($this->image_dir.$category->id.'_background.jpg')
-                    && !unlink($this->image_dir.$category->id.'_background.jpg'))
-                    return false;
-            }
-            if (file_exists(_PS_TMP_IMG_DIR_.'category_'.$category->id.'_background.jpg')
-                && !unlink(_PS_TMP_IMG_DIR_.'category_'.$category->id.'_background.jpg'))
-                return false;
-            if (file_exists(_PS_TMP_IMG_DIR_.'category_mini_'.$category->id.'_background.jpg')
-                && !unlink(_PS_TMP_IMG_DIR_.'category_mini_'.$category->id.'_background.jpg'))
-                return false;
-     
-            $types = ImageType::getImagesTypes();
-            foreach ($types as $image_type)
-                if (file_exists($this->image_dir.$category->id.'_background-'.stripslashes($image_type['name']).'.jpg')
-                && !unlink($this->image_dir.$category->id.'_background-'.stripslashes($image_type['name']).'.jpg'))
-                    return false;
-        }
-
-        return true;
-    }	
 }

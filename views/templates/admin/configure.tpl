@@ -42,9 +42,20 @@
 		<div class="form-wrapper">
 			<div class="form-group">
 				<label class="control-label col-lg-3">{l s='Default background color' mod='categorybackgroundmanager'}</label>
-				<div class="col-lg-3">
-					<input type="text" size="20" name="CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR" value="{$CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR}" />
-					<p class="help-block">{l s='e.g. "#fff" for the color white' mod='categorybackgroundmanager'}</p>
+				<div class="col-lg-9">
+					<div class="form-group">
+						<div class="col-lg-2">
+							<div class="row">
+								<div class="input-group">
+
+									<input type="text" class="color mColorPickerInput mColorPicker" id="CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR" value="{$CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR}" data-hex="true" name="color"/>
+									<span style="cursor:pointer;" id="icp_CATEGORYBACKGROUNDMANAGER_DEFAULTCOLOR" class="mColorPickerTrigger input-group-addon" data-mcolorpicker="true">
+										<img src="../img/admin/color.png" />
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -84,3 +95,7 @@
 
 	</fieldset>
 </form>
+
+
+
+<script type="text/javascript" src="{$colorpicker_path}"></script>
