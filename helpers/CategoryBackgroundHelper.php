@@ -7,7 +7,7 @@
 class CategoryBackgroundHelper
 {
 
-    protected $fieldImageSettings;
+    public $fieldImageSettings;
     protected $image_dir;
 
     public function __construct()

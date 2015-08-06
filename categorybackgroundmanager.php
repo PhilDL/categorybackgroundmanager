@@ -13,7 +13,6 @@ require_once(_PS_MODULE_DIR_.'categorybackgroundmanager/helpers/CategoryBackgrou
 class CategoryBackgroundManager extends Module
 {
 	private   $errors = null;
-	protected $fieldImageSettings;
 	protected $helper;
 
 
@@ -204,7 +203,7 @@ class CategoryBackgroundManager extends Module
             $this->context->controller->_errors[] = Tools::displayError('Error: ').mysql_error();
 
         // HANDLING IMAGES
-		$ret = $this->helper->uploadImage($id_category.'_background', 'background_image', $this->fieldImageSettings['dir'].'/');
+		$ret = $this->helper->uploadImage($id_category.'_background', 'background_image', $this->helper->fieldImageSettings['dir'].'/');
 
 		return $ret;        
 	}	
