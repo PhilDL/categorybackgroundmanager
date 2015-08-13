@@ -107,7 +107,6 @@ class CategoryBackgroundManager extends Module
 	{
 		$output = "";
 		if (Tools::isSubmit('submit'.Tools::ucfirst($this->name))) {
-;
 			$default_background_color = Tools::getValue('color');
 			$recursive_backgrounds    = Tools::getValue('CATEGORYBACKGROUNDMANAGER_RECURSIVEBG');
 			$image_position           = Tools::getValue('CATEGORYBACKGROUNDMANAGER_IMAGEPOSITION');
